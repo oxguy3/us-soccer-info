@@ -22,6 +22,7 @@
       <div class="row">
         <div class="col-sm-12">
           <h1>Hello, world!</h1>
+          <pre id="output"></pre>
         </div>
       </div>
     </div>
@@ -30,5 +31,26 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="js/jdataview.js"></script>
     <script src="js/tea_js.js"></script>
+    <script>
+      var Opta = {};
+      Opta.bin = {};
+    </script>
+    <script src="http://widget.cloud.opta.net/v3/bin/f1_8.js"></script>
+    <script>
+      function makeDataview(input) {
+        var dataview = new jDataView(decrypt(window.atob(input),"P!Fgob$*LKDF D)(F IDD&P?/"));
+        dataview.getInt8();
+        return dataview;
+      }
+      $.ajax(
+        "http://omo.akamai.opta.net/competition.php?feed_type=f1_packed&competition=807&season_id=2017&user=OW2017&psw=dXWg5gVZ", {
+        dataType: 'jsonp',
+        jsonp: 'jsoncallback',
+        success: function(data, textStatus) {
+          var obj = Opta.bin.f1_8(makeDataview(data.data));
+          $('#output').text(JSON.stringify(obj, null, 2));
+        }
+      });
+    </script>
   </body>
 </html>

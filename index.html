@@ -36,11 +36,13 @@
       Opta.bin = {};
       Opta.binary = {
             tsToDate: function(a, b) {
-                var c = new Opta.moment.tz(1e3 * a, b || "Etc/UTC");
-                return c.utc()
+                return null;
+                /*var c = new Opta.moment.tz(1e3 * a, b || "Etc/UTC");
+                return c.utc()*/
             },
             correctedTsToDate: function(a, b) {
-                return Opta.binary.tsToDate(a, b || "Europe/London").utc()
+                return null;
+                /*return Opta.binary.tsToDate(a, b || "Europe/London").utc()*/
             },
             readString: function(a) {
                 for (var b, c = ""; b = a.getChar(), 0 !== b.charCodeAt(0);) c += b;

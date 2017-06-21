@@ -708,18 +708,24 @@
     </script>
     <script src="http://widget.cloud.opta.net/v3/bin/f1_8.js"></script>
     <script>
+      var season;
+      function println(msg) {
+        $('#output').text($('#output').text() + msg + "\n");
+      }
       function makeDataview(input) {
         var dataview = new jDataView(decrypt(window.atob(input),"P!Fgob$*LKDF D)(F IDD&P?/"));
         dataview.getInt8();
         return dataview;
       }
+      println("Loading matches (f1_8)");
       $.ajax(
         "http://omo.akamai.opta.net/competition.php?feed_type=f1_packed&competition=807&season_id=2017&user=OW2017&psw=dXWg5gVZ", {
         dataType: 'jsonp',
         jsonp: 'jsoncallback',
         success: function(data, textStatus) {
           var obj = Opta.bin.f1_8(makeDataview(data.data));
-          $('#output').text(JSON.stringify(obj, null, 2));
+          season = obj;
+          println("Matches (f1_8) loaded!");
         }
       });
     </script>
